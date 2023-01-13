@@ -1,0 +1,51 @@
+#include<iostream>
+#include<sys/time.h>
+using namespace std;
+
+void sort(int *a,int num);
+
+int main()
+{   
+    struct timeval t1,t2;
+    int num;
+    cout<<"Enter Number : ";
+    cin>>num;
+    int *a;
+    a = new int[num];
+    for(int i = 0;i<num;i++)
+        a[i]=i+1;
+    
+    gettimeofday(&t1,NULL);
+    sort(a,num);
+    gettimeofday(&t2,NULL);
+    cout<<endl<<endl;
+
+    cout<<endl;
+    cout<<t1.tv_sec<<" "<<t1.tv_usec<<endl;
+    cout<<t2.tv_sec<<" "<<t2.tv_usec<<endl;
+    cout<<"\nTime taken by selection sort : "<<(t2.tv_sec*1000000 + t2.tv_usec) - (t1.tv_sec*1000000 + t1.tv_usec);
+    delete a;
+    return 0;
+}
+
+void sort(int *a,int num){
+    int temp,flag;
+    for(int i=0;i<num-1;i++)
+    {
+        flag=0;
+        for(int j=0;j<num-1;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+                flag=1;
+            }
+        }
+        if(flag == 0)
+            break;
+        
+    }
+    cout<<endl;
+}
